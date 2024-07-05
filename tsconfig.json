@@ -11,6 +11,8 @@
       "paths": {
         "@game/*": ["game/*"],
         "@types/*": ["types/*"],
+        "@modules/*": ["modules/*"],
+        "@loaders/*": ["loaders/*"],
       }
   },
   "include": ["src/**/*.ts"],

@@ -1,10 +1,9 @@
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import typeDefs from './typesDefs';
-import resolvers from './resolvers';
+import { gql } from 'apollo-server';
+import { userTypeDefs } from '@modules/user/user.typeDefs';
+import { pokemonTypeDefs } from '@modules/pokemon/pokemon.typeDefs';
 
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
+export const typeDefs = gql`
+  ${userTypeDefs}
+  ${pokemonTypeDefs}
+`;
 
-export default schema;
