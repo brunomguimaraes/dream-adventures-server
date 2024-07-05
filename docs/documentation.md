@@ -3,15 +3,14 @@
 1. **Stats and Attributes**
    - **Physical Attack (PHY_ATK)**: Represents the monster's strength in physical combat.
    - **Elemental Attack (ELE_ATK)**: Reflects the power of elemental-based attacks like fire, water, etc.
-   - **Psychic Attack (PSY_ATK)**: Denotes mental and psychic abilities used in combat.
+   - **Energy Attack (ENE_ATK)**: Denotes mental and energy abilities used in combat.
    - **Adaptable Attack (ADA_ATK)**: Indicates the ability to use various parts of the body or tools effectively.
    - **Physical Defense (PHY_DEF)**: Measures the monster's ability to withstand physical attacks.
    - **Elemental Defense (ELE_DEF)**: Represents resistance against elemental attacks.
-   - **Psychic Defense (PSY_DEF)**: Shows resilience against psychic attacks.
+   - **Energy Defense (ENE_DEF)**: Shows resilience against energy attacks.
    - **Adaptable Defense (ADA_DEF)**: Indicates versatility in defense, using various parts of the body or tools.
    - **Speed (SPD)**: Determines the order of actions in a battle.
    - **Health Points (HP)**: The overall health of the monster.
-   - **Energy (ENG)**: Represents stamina and energy levels, impacting the effectiveness of attacks.
    - **Morale (MOR)**: Reflects psychological readiness, influencing critical hits and resilience.
    - **Affinity (AFF)**: The bond between the trainer and the monster, affecting performance.
    - **Focus (FOC)**: Concentration level, impacting accuracy and resistance to status effects.

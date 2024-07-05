@@ -1,0 +1,30 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+.local/
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+/build-storybook
+
+# local config
+/server/local-config.js
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# source
+/public/images
+/src/*.css
+/src/images/output
+
+npm-debug.log*

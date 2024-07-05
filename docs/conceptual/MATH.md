@@ -291,3 +291,153 @@ nextTurn();
 ### Conclusion
 
 The Pokémon-themed RPG battle system is designed to provide a rich and engaging experience by incorporating detailed stats, status effects, environmental conditions, and trainer-adjustable parameters. The complex calculations and narrative elements work together to create a dynamic and immersive battle simulation that captures the excitement and strategy of anime-style Pokémon battles.
+
+
+Sure, here are some example stats for a few Pokémon-like creatures to help with the combat calculations. These stats include the necessary attributes based on the `Stats` type you provided.
+
+### Example Pokémon Stats
+
+#### Charflame (Fire Type Pokémon)
+```json
+{
+  "PHY_ATK": 80,
+  "ELE_ATK": 100,
+  "ENE_ATK": 50,
+  "ADA_ATK": 70,
+  "PHY_DEF": 60,
+  "ELE_DEF": 70,
+  "ENE_DEF": 50,
+  "ADA_DEF": 65,
+  "SPD": 90,
+  "HP": 120,
+  "MOR": 80,
+  "AFF": 70,
+  "FOC": 85,
+  "AUR": 40,
+  "INST": 30,
+  "SYN": 50,
+  "CRIT_RATE": 0.15,
+  "CRIT_MULT": 1.5,
+  "ELEM_MULT": 1.2,
+  "ACC": 85,
+  "CRIT_DEF": 10,
+  "DEF_PEN": 15
+}
+```
+
+#### Aquasurge (Water Type Pokémon)
+```json
+{
+  "PHY_ATK": 70,
+  "ELE_ATK": 95,
+  "ENE_ATK": 60,
+  "ADA_ATK": 75,
+  "PHY_DEF": 80,
+  "ELE_DEF": 85,
+  "ENE_DEF": 70,
+  "ADA_DEF": 90,
+  "SPD": 75,
+  "HP": 130,
+  "MOR": 90,
+  "AFF": 60,
+  "FOC": 80,
+  "AUR": 35,
+  "INST": 40,
+  "SYN": 55,
+  "CRIT_RATE": 0.12,
+  "CRIT_MULT": 1.4,
+  "ELEM_MULT": 1.1,
+  "ACC": 90,
+  "CRIT_DEF": 15,
+  "DEF_PEN": 10
+}
+```
+
+#### Electray (Electric Type Pokémon)
+```json
+{
+  "PHY_ATK": 60,
+  "ELE_ATK": 110,
+  "ENE_ATK": 55,
+  "ADA_ATK": 65,
+  "PHY_DEF": 50,
+  "ELE_DEF": 75,
+  "ENE_DEF": 60,
+  "ADA_DEF": 70,
+  "SPD": 100,
+  "HP": 110,
+  "MOR": 70,
+  "AFF": 75,
+  "FOC": 90,
+  "AUR": 45,
+  "INST": 35,
+  "SYN": 60,
+  "CRIT_RATE": 0.18,
+  "CRIT_MULT": 1.6,
+  "ELEM_MULT": 1.3,
+  "ACC": 95,
+  "CRIT_DEF": 20,
+  "DEF_PEN": 12
+}
+```
+
+### Running a Combat Calculation Example
+
+Let's say Charflame is attacking Aquasurge with an elemental (fire) attack, and we assume the elemental advantage (fire vs. water) is 0.8 (since fire is less effective against water):
+
+```typescript
+const charflameStats: Stats = {
+  PHY_ATK: 80,
+  ELE_ATK: 100,
+  ENE_ATK: 50,
+  ADA_ATK: 70,
+  PHY_DEF: 60,
+  ELE_DEF: 70,
+  ENE_DEF: 50,
+  ADA_DEF: 65,
+  SPD: 90,
+  HP: 120,
+  MOR: 80,
+  AFF: 70,
+  FOC: 85,
+  AUR: 40,
+  INST: 30,
+  SYN: 50,
+  CRIT_RATE: 0.15,
+  CRIT_MULT: 1.5,
+  ELEM_MULT: 1.2,
+  ACC: 85,
+  CRIT_DEF: 10,
+  DEF_PEN: 15
+};
+
+const aquasurgeStats: Stats = {
+  PHY_ATK: 70,
+  ELE_ATK: 95,
+  ENE_ATK: 60,
+  ADA_ATK: 75,
+  PHY_DEF: 80,
+  ELE_DEF: 85,
+  ENE_DEF: 70,
+  ADA_DEF: 90,
+  SPD: 75,
+  HP: 130,
+  MOR: 90,
+  AFF: 60,
+  FOC: 80,
+  AUR: 35,
+  INST: 40,
+  SYN: 55,
+  CRIT_RATE: 0.12,
+  CRIT_MULT: 1.4,
+  ELEM_MULT: 1.1,
+  ACC: 90,
+  CRIT_DEF: 15,
+  DEF_PEN: 10
+};
+
+const damage = calculateDamage(charflameStats, aquasurgeStats, 'elemental', 0.8);
+console.log(`Charflame deals ${damage} damage to Aquasurge!`);
+```
+
+You can replace `Charflame` and `Aquasurge` with any other Pokémon-like creatures and adjust their stats accordingly to test different combat scenarios.
