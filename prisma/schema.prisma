@@ -7,25 +7,141 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int           @id @default(autoincrement())
-  name     String
-  email    String        @unique
-  password String
-  pokemons UserPokemon[]
+enum PokemonType {
+  NORMAL
+  FIRE
+  WATER
+  ELECTRIC
+  GRASS
+  ICE
+  FIGHTING
+  POISON
+  GROUND
+  FLYING
+  PSYCHIC
+  BUG
+  ROCK
+  GHOST
+  DRAGON
+  DARK
+  STEEL
+  FAIRY
+}
+
+enum MoveCategory {
+  PHYSICAL
+  ELEMENTAL
+  ENERGY
+  ADAPTABLE
+}
+
+enum StorageStatus {
+  WITH_TRAINER
+  IN_POKEBANK
+}
+
+model BaseStats {
+  id        Int     @id @default(autoincrement())
+  phyAtk    Int
+  eleAtk    Int
+  eneAtk    Int
+  adaAtk    Int
+  phyDef    Int
+  eleDef    Int
+  eneDef    Int
+  adaDef    Int
+  spd       Int
+  hp        Int
+  mor       Int
+  aff       Int
+  foc       Int
+  aur       Int
+  inst      Int
+  syn       Int
+  critRate  Int
+  critMult  Float
+  elemMult  Float
+  acc       Int
+  toughness Int
+  pierce    Int
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  pokemonId Int     @unique
+}
+
+model Stats {
+  id        Int     @id @default(autoincrement())
+  phyAtk    Int
+  eleAtk    Int
+  eneAtk    Int
+  adaAtk    Int
+  phyDef    Int
+  eleDef    Int
+  eneDef    Int
+  adaDef    Int
+  spd       Int
+  hp        Int
+  mor       Int
+  aff       Int
+  foc       Int
+  aur       Int
+  inst      Int
+  syn       Int
+  critRate  Int
+  critMult  Float
+  elemMult  Float
+  acc       Int
+  toughness Int
+  pierce    Int
+  userPokemon UserPokemon?
+  wildPokemon WildPokemon?
 }
 
 model Pokemon {
-  id          Int           @id @default(autoincrement())
-  name        String
-  type        String
-  UserPokemon UserPokemon[]
+  id         Int        @id @default(autoincrement())
+  name       String
+  types      PokemonType[]
+  catchRate  Float
+  genderRatio Float
+  baseStats  BaseStats?
+  moves      Move[]
+  userPokemon UserPokemon[]
+  wildPokemon WildPokemon[]
+}
+
+model Move {
+  id        Int        @id @default(autoincrement())
+  name      String
+  type      PokemonType
+  category  MoveCategory
+  power     Int
+  accuracy  Float
+  pokemon   Pokemon?   @relation(fields: [pokemonId], references: [id])
+  pokemonId Int?
+}
+
+model User {
+  id         Int          @id @default(autoincrement())
+  name       String
+  email      String       @unique
+  password   String
+  pokemons   UserPokemon[]
 }
 
 model UserPokemon {
-  id        Int     @id @default(autoincrement())
-  userId    Int
-  pokemonId Int
-  user      User    @relation(fields: [userId], references: [id])
-  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  id         Int        @id @default(autoincrement())
+  userId     Int
+  pokemonId  Int
+  user       User       @relation(fields: [userId], references: [id])
+  pokemon    Pokemon    @relation(fields: [pokemonId], references: [id])
+  stats      Stats?     @relation(fields: [statsId], references: [id])
+  statsId    Int?       @unique
+  status     StorageStatus
+}
+
+model WildPokemon {
+  id         Int        @id @default(autoincrement())
+  pokemon    Pokemon    @relation(fields: [pokemonId], references: [id])
+  pokemonId  Int
+  stats      Stats?     @relation(fields: [statsId], references: [id])
+  statsId    Int?       @unique
 }

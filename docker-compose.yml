@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  dream_adventures_postgres:
+    image: postgres:latest
+    container_name: dream_adventures_postgres
+    environment:
+      POSTGRES_USER: dream_adventures_user
+      POSTGRES_PASSWORD: dream_adventures_password
+      POSTGRES_DB: dream_adventures_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - dream_adventures_postgres_data:/var/lib/postgresql/data
+
+  # dream_adventures_pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: dream_adventures_pgadmin
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@email.com
+  #     PGADMIN_DEFAULT_PASSWORD: password
+  #   ports:
+  #     - "8080:80"
+
+volumes:
+  dream_adventures_postgres_data:
