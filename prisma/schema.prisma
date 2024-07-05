@@ -104,8 +104,18 @@ model Pokemon {
   genderRatio Float
   baseStats  BaseStats?
   moves      Move[]
+  sprites    Sprite[]
   userPokemon UserPokemon[]
   wildPokemon WildPokemon[]
+}
+
+model Sprite {
+  id         Int        @id @default(autoincrement())
+  url        String     // URL of the stored sprite
+  description String
+  pokemon    Pokemon   @relation(fields: [pokemonId], references: [id])
+  pokemonId  Int
+  context    String?   // Optional field to describe the context (e.g., game, event)
 }
 
 model Move {
