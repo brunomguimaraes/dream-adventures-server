@@ -35,53 +35,54 @@ export const pokemonTypeDefs = gql`
   }
 
   type BaseStats {
-    PHY_ATK: Int!
-    ELE_ATK: Int!
-    ENE_ATK: Int!
-    ADA_ATK: Int!
-    PHY_DEF: Int!
-    ELE_DEF: Int!
-    ENE_DEF: Int!
-    ADA_DEF: Int!
-    SPD: Int!
-    HP: Int!
-    MOR: Int!
-    AFF: Int!
-    FOC: Int!
-    AUR: Int!
-    INST: Int!
-    SYN: Int!
-    CRIT_RATE: Int!
-    CRIT_MULT: Float!
-    ELEM_MULT: Float!
-    ACC: Int!
-    TOUGHNESS: Int!
-    PIERCE: Int!
+    id: ID!
+    phyAtk: Int!
+    eleAtk: Int!
+    eneAtk: Int!
+    adaAtk: Int!
+    phyDef: Int!
+    eleDef: Int!
+    eneDef: Int!
+    adaDef: Int!
+    spd: Int!
+    hp: Int!
+    mor: Int!
+    aff: Int!
+    foc: Int!
+    aur: Int!
+    inst: Int!
+    syn: Int!
+    critRate: Int!
+    critMult: Float!
+    elemMult: Float!
+    acc: Int!
+    toughness: Int!
+    pierce: Int!
   }
 
-  type Stats {
-    PHY_ATK: Int!
-    ELE_ATK: Int!
-    ENE_ATK: Int!
-    ADA_ATK: Int!
-    PHY_DEF: Int!
-    ELE_DEF: Int!
-    ENE_DEF: Int!
-    ADA_DEF: Int!
-    SPD: Int!
-    HP: Int!
-    MOR: Int!
-    AFF: Int!
-    FOC: Int!
-    AUR: Int!
-    INST: Int!
-    SYN: Int!
-    CRIT_RATE: Int!
-    CRIT_MULT: Float!
-    ELEM_MULT: Float!
-    ACC: Int!
-    TOUGHNESS: Int!
-    PIERCE: Int!
+  input BaseStatsInput {
+    phyAtk: Int!
+    eleAtk: Int!
+    eneAtk: Int!
+    adaAtk: Int!
+    phyDef: Int!
+    eleDef: Int!
+    eneDef: Int!
+    adaDef: Int!
+    spd: Int!
+    hp: Int!
+    mor: Int!
+    aff: Int!
+    foc: Int!
+    aur: Int!
+    inst: Int!
+    syn: Int!
+    critRate: Int!
+    critMult: Float!
+    elemMult: Float!
+    acc: Int!
+    toughness: Int!
+    pierce: Int!
   }
 
   type Pokemon {
@@ -112,14 +113,22 @@ export const pokemonTypeDefs = gql`
     id: ID!
     user: User!
     pokemon: Pokemon!
-    stats: Stats!
+    stats: BaseStats!
     status: StorageStatus!
   }
 
   type WildPokemon {
     id: ID!
     pokemon: Pokemon!
-    stats: Stats!
+    stats: BaseStats!
+  }
+
+  type Sprite {
+    id: ID!
+    url: String!
+    description: String!
+    context: String!
+    pokemon: Pokemon!
   }
 
   type Query {
@@ -130,36 +139,32 @@ export const pokemonTypeDefs = gql`
   }
 
   type Mutation {
-    createPokemon(name: String!, types: [PokemonType!]!, catchRate: Float!, genderRatio: Float!, baseStats: BaseStatsInput!): Pokemon!
+    createPokemon(
+      name: String!
+      types: [PokemonType!]!
+      catchRate: Float!
+      genderRatio: Float!
+      baseStats: BaseStatsInput!
+    ): Pokemon!
     catchPokemon(userId: Int!, pokemonId: Int!): UserPokemon!
-    createMove(name: String!, type: PokemonType!, category: MoveCategory!, power: Int!, accuracy: Float!): Move!
+    createMove(
+      name: String!
+      type: PokemonType!
+      category: MoveCategory!
+      power: Int!
+      accuracy: Float!
+    ): Move!
     assignMoveToPokemon(pokemonId: Int!, moveId: Int!): Pokemon!
     generateWildPokemon(pokemonId: Int!, level: Int!): WildPokemon!
-    updateUserPokemonStatus(userPokemonId: ID!, status: StorageStatus!): UserPokemon!
-  }
-
-  input BaseStatsInput {
-    PHY_ATK: Int!
-    ELE_ATK: Int!
-    ENE_ATK: Int!
-    ADA_ATK: Int!
-    PHY_DEF: Int!
-    ELE_DEF: Int!
-    ENE_DEF: Int!
-    ADA_DEF: Int!
-    SPD: Int!
-    HP: Int!
-    MOR: Int!
-    AFF: Int!
-    FOC: Int!
-    AUR: Int!
-    INST: Int!
-    SYN: Int!
-    CRIT_RATE: Int!
-    CRIT_MULT: Float!
-    ELEM_MULT: Float!
-    ACC: Int!
-    TOUGHNESS: Int!
-    PIERCE: Int!
+    updateUserPokemonStatus(
+      userPokemonId: ID!
+      status: StorageStatus!
+    ): UserPokemon!
+    createSprite(
+      pokemonId: ID!
+      url: String!
+      description: String!
+      context: String!
+    ): Sprite!
   }
 `;

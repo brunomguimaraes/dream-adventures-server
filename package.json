@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "build": "tsc",
     "serve": "node dist/index.js",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
@@ -33,6 +33,7 @@
     "prettier": "^3.3.2",
     "prisma": "^5.16.1",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.5.3"
   }
 }

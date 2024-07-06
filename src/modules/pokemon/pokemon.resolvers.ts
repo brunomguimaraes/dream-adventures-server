@@ -51,17 +51,34 @@ export const pokemonResolvers = {
       _: any,
       { name, types, catchRate, genderRatio, baseStats }: any,
     ) => {
-      return await prisma.pokemon.create({
-        data: {
-          name,
-          types,
-          catchRate,
-          genderRatio,
-          baseStats: {
-            create: baseStats,
+      try {
+        const newPokemon = await prisma.pokemon.create({
+          data: {
+            name,
+            types,
+            catchRate,
+            genderRatio,
+            baseStats: {
+              create: { ...baseStats },
+            },
           },
-        },
-      });
+          // The include statement is not strictly necessary for the creation of the Pokemon,
+          // but it is used to ensure that the created Pokemon object returned by the prisma.pokemon.create function
+          // includes the related baseStats data. This is useful if you need to have the complete Pokemon object,
+          // including its base stats, immediately available after creation.
+          // Without the include statement, the returned Pokemon object will not automatically
+          // contain the related baseStats data. If you don't need to use the baseStats data immediately
+          // after the creation, you can remove the include statement.
+          include: {
+            baseStats: true,
+          },
+        });
+
+        return newPokemon;
+      } catch (error) {
+        console.error('Error creating Pokemon:', error);
+        throw new Error('Failed to create Pokemon');
+      }
     },
     catchPokemon: async (_: any, { userId, pokemonId, level }: any) => {
       const pokemon = await prisma.pokemon.findUnique({
